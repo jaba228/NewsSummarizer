@@ -1,0 +1,6 @@
+@NewsSummarizer.Api_HostAddress = http://localhost:5136
+
+GET {{NewsSummarizer.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

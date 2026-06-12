@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/NewsSummarizer.Api/NewsSummarizer.Api.csproj" />
+    <Project Path="src/NewsSummarizer.Application/NewsSummarizer.Application.csproj" />
+    <Project Path="src/NewsSummarizer.Domain/NewsSummarizer.Domain.csproj" />
+    <Project Path="src/NewsSummarizer.Infrastructure/NewsSummarizer.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/NewsSummarizer.Application.Tests/NewsSummarizer.Application.Tests.csproj" />
+  </Folder>
+</Solution>
