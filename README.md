@@ -1,3 +1,6 @@
+# DEVELOP BRANCH
+Branch for development only. It can contain even unfinished code and buch of garbage. 
+
 # News Summarizer
 Simple Telegram bot that fetches news and send it to user with AI summary of it. Also you can receive scheduled digests. 
 
