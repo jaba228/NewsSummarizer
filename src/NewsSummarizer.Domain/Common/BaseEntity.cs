@@ -4,7 +4,7 @@ namespace NewsSummarizer.Domain;
 //       abstract class, because it automatically
 //       implements all equality methods. Research
 //       on that topic needed.
-abstract class BaseEntity : IEquatable<BaseEntity>
+public abstract class BaseEntity : IEquatable<BaseEntity>
 {
     // TODO: maybe use something like uuid for all 
     //       of the classes? 

@@ -1,6 +1,6 @@
-namespace NewsSummarizer.Domain.Entities;
+namespace NewsSummarizer.Domain;
 
-class User : BaseEntity
+public class User : BaseEntity
 {
 	public static int MinDigestArticleCount = 1;
 	public static int MaxDigestArticleCount = 20;
@@ -20,12 +20,16 @@ class User : BaseEntity
 
 	public User(long tgId, string firstName, string? userName) : base(tgId)
 	{
-		if (firstName is null) throw new ArgumentException("Something went wrong on Telegram user data reception.");
+		if (firstName is null) 
+			throw new ArgumentException("Something went wrong on Telegram user data reception.");
+		
 		FirstName = firstName;
 		Username = userName ?? string.Empty;
+		
 		RegistredAt = DateTime.UtcNow;
 		DigestTime = DefaultDigestTime;
 		DigestArticleCount = DefaultDigestArticleCount;
+		
 		_subscriptions = new List<Subscription>();
 	}
 
@@ -37,7 +41,7 @@ class User : BaseEntity
 	public void UpdateDigestArticleCount(int newCount)
 	{
 		if (newCount < MinDigestArticleCount || newCount > MaxDigestArticleCount)
-			throw new InvalidDigestSettingsException();
+			throw new InvalidDigestSettingsException("Invalid digest article count.");
 		DigestArticleCount = newCount;
 	}
 
@@ -52,19 +56,23 @@ class User : BaseEntity
 			throw new ArgumentNullException("No topic provided.");
 
 		if (IsSubscribedTo(topic.Id))
-			throw new AlreadeSubscribedException();		
+			throw new AlreadySubscribedException("User already subsribed");		
 
 		_subscriptions.Add(new Subscription(Id, topic.Id));	
 	}
 
 	public void Unsubscribe(Topic topic)
 	{
-		// TODO: make it look not like a shitty-ass lamer code.
-		//       Plus it think it's very wrong, but need to 
-		//       research anyway.
-		if (_subscriptions.Exists(s => s.TopicId == topic.Id))
-			_subscriptions.Remove(_subscriptions.Find(s => s.TopicId == topic.Id));
+		// Remaked it, but still think it's not good enough
+		Subscription subscriptionToDelete = _subscriptions.Find(s => s.TopicId == topic.Id);
+		if (subscriptionToDelete != null)
+			_subscriptions.Remove(subscriptionToDelete);
 		else
-			throw new NotSubscribedException();			
+			throw new NotSubscribedException("User isn't subscribed to Topic");			
+	}
+
+	public IEnumerable<long> GetSubscribedTopicsId()
+	{
+		return _subscriptions.Select(s => s.TopicId);
 	}
 }
