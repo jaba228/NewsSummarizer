@@ -63,11 +63,10 @@ class User : BaseEntity
 
 	public void Unsubscribe(Topic topic)
 	{
-		// TODO: make it look not like a shitty-ass lamer code.
-		//       Plus it think it's very wrong, but need to 
-		//       research anyway.
-		if (_subscriptions.Exists(s => s.TopicId == topic.Id))
-			_subscriptions.Remove(_subscriptions.Find(s => s.TopicId == topic.Id));
+		// Remaked it, but still think it's not good enough
+		Subscription subscriptionToDelete = _subscriptions.Find(s => s.TopicId == topic.Id);
+		if (subscriptionToDelete != null)
+			_subscriptions.Remove(subscriptionToDelete);
 		else
 			throw new NotSubscribedException();			
 	}
