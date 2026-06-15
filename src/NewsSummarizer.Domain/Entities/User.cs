@@ -20,12 +20,16 @@ class User : BaseEntity
 
 	public User(long tgId, string firstName, string? userName) : base(tgId)
 	{
-		if (firstName is null) throw new ArgumentException("Something went wrong on Telegram user data reception.");
+		if (firstName is null) 
+			throw new ArgumentException("Something went wrong on Telegram user data reception.");
+		
 		FirstName = firstName;
 		Username = userName ?? string.Empty;
+		
 		RegistredAt = DateTime.UtcNow;
 		DigestTime = DefaultDigestTime;
 		DigestArticleCount = DefaultDigestArticleCount;
+		
 		_subscriptions = new List<Subscription>();
 	}
 
@@ -66,5 +70,10 @@ class User : BaseEntity
 			_subscriptions.Remove(_subscriptions.Find(s => s.TopicId == topic.Id));
 		else
 			throw new NotSubscribedException();			
+	}
+
+	public IEnumerable<long> GetSubscribedTopicsId()
+	{
+		return _subscriptions.Select(s => s.TopicId);
 	}
 }
