@@ -1,6 +1,6 @@
-namespace NewsSummarizer.Domain.Entities;
+namespace NewsSummarizer.Domain;
 
-class User : BaseEntity
+public class User : BaseEntity
 {
 	public static int MinDigestArticleCount = 1;
 	public static int MaxDigestArticleCount = 20;

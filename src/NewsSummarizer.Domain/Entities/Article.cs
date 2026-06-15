@@ -1,6 +1,6 @@
 namespace NewsSummarizer.Domain;
 
-class Article : BaseEntity
+public class Article : BaseEntity
 {
     public string? Url;
     public string? Title;

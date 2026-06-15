@@ -1,6 +1,6 @@
 namespace NewsSummarizer.Domain;
 
-class Subscription
+public class Subscription
 {
         public long UserId { get; private set; } 
         public long TopicId { get; private set; }

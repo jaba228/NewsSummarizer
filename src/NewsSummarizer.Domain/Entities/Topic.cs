@@ -1,6 +1,6 @@
 namespace NewsSummarizer.Domain;
 
-class Topic : BaseEntity
+public class Topic : BaseEntity
 {
     public string? Slug { get; private set; }
     public string? Name { get; private set; }
