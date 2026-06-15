@@ -41,7 +41,7 @@ class User : BaseEntity
 	public void UpdateDigestArticleCount(int newCount)
 	{
 		if (newCount < MinDigestArticleCount || newCount > MaxDigestArticleCount)
-			throw new InvalidDigestSettingsException();
+			throw new InvalidDigestSettingsException("Invalid digest article count.");
 		DigestArticleCount = newCount;
 	}
 
@@ -56,7 +56,7 @@ class User : BaseEntity
 			throw new ArgumentNullException("No topic provided.");
 
 		if (IsSubscribedTo(topic.Id))
-			throw new AlreadeSubscribedException();		
+			throw new AlreadySubscribedException("User already subsribed");		
 
 		_subscriptions.Add(new Subscription(Id, topic.Id));	
 	}
@@ -68,7 +68,7 @@ class User : BaseEntity
 		if (subscriptionToDelete != null)
 			_subscriptions.Remove(subscriptionToDelete);
 		else
-			throw new NotSubscribedException();			
+			throw new NotSubscribedException("User isn't subscribed to Topic");			
 	}
 
 	public IEnumerable<long> GetSubscribedTopicsId()

@@ -1,6 +1,9 @@
 namespace NewsSummarizer.Domain;
 
-class AlreadeSubscribedException : Exception
+class AlreadySubscribedException : DomainException
 {
-    
+    public AlreadySubscribedException(string message) : base(message)
+    {
+        
+    }
 }
